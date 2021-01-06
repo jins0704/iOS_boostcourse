@@ -13,5 +13,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func unwindToMainViewController(segue : UIStoryboardSegue){
+       }
 }
 

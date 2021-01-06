@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F3D5C3C25A556A70004F512 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D5C3B25A556A70004F512 /* ThirdViewController.swift */; };
 		4F847EE425A4980100627130 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F847EE325A4980100627130 /* AppDelegate.swift */; };
 		4F847EE625A4980100627130 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F847EE525A4980100627130 /* SceneDelegate.swift */; };
 		4F847EE825A4980100627130 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F847EE725A4980100627130 /* ViewController.swift */; };
@@ -15,6 +16,7 @@
 		4F847EF025A4980300627130 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F847EEE25A4980300627130 /* LaunchScreen.storyboard */; };
 		4F847EFB25A4980400627130 /* __SignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F847EFA25A4980400627130 /* __SignUpTests.swift */; };
 		4F847F0625A4980400627130 /* __SignUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F847F0525A4980400627130 /* __SignUpUITests.swift */; };
+		4F99173D25A535C500589ADE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99173C25A535C500589ADE /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F3D5C3B25A556A70004F512 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		4F847EE025A4980100627130 /* 2.SignUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2.SignUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F847EE325A4980100627130 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F847EE525A4980100627130 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		4F847F0125A4980400627130 /* 2.SignUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 2.SignUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F847F0525A4980400627130 /* __SignUpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __SignUpUITests.swift; sourceTree = "<group>"; };
 		4F847F0725A4980400627130 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F99173C25A535C500589ADE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +103,9 @@
 		4F847EE225A4980100627130 /* 2.SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				4F99173B25A5359600589ADE /* Controller */,
 				4F847EE325A4980100627130 /* AppDelegate.swift */,
 				4F847EE525A4980100627130 /* SceneDelegate.swift */,
-				4F847EE725A4980100627130 /* ViewController.swift */,
 				4F847EE925A4980100627130 /* Main.storyboard */,
 				4F847EEC25A4980300627130 /* Assets.xcassets */,
 				4F847EEE25A4980300627130 /* LaunchScreen.storyboard */,
@@ -126,6 +130,16 @@
 				4F847F0725A4980400627130 /* Info.plist */,
 			);
 			path = 2.SignUpUITests;
+			sourceTree = "<group>";
+		};
+		4F99173B25A5359600589ADE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4F847EE725A4980100627130 /* ViewController.swift */,
+				4F99173C25A535C500589ADE /* SecondViewController.swift */,
+				4F3D5C3B25A556A70004F512 /* ThirdViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +272,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F99173D25A535C500589ADE /* SecondViewController.swift in Sources */,
 				4F847EE825A4980100627130 /* ViewController.swift in Sources */,
+				4F3D5C3C25A556A70004F512 /* ThirdViewController.swift in Sources */,
 				4F847EE425A4980100627130 /* AppDelegate.swift in Sources */,
 				4F847EE625A4980100627130 /* SceneDelegate.swift in Sources */,
 			);
