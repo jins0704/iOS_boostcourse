@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="aIE-4R-xmf">
-                                <rect key="frame" x="30" y="294" width="354" height="91"/>
+                                <rect key="frame" x="30" y="274" width="354" height="91"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디를 입력하시오." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w8v-U8-cKA">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="34"/>
@@ -32,21 +32,21 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fxf-bX-PaZ">
-                                <rect key="frame" x="60" y="125.5" width="294" height="117"/>
+                                <rect key="frame" x="60" y="115.5" width="294" height="117"/>
                                 <color key="tintColor" systemColor="systemIndigoColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="vYM-za-VIU"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqn-LZ-x75">
-                                <rect key="frame" x="294" y="415" width="50" height="30"/>
+                                <rect key="frame" x="294" y="395" width="50" height="30"/>
                                 <state key="normal" title="SignUp"/>
                                 <connections>
                                     <segue destination="VYH-kb-6kg" kind="presentation" id="ThI-nZ-Xlv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFT-ef-bdY">
-                                <rect key="frame" x="70" y="415" width="43" height="30"/>
+                                <rect key="frame" x="70" y="395" width="43" height="30"/>
                                 <state key="normal" title="SignIn"/>
                             </button>
                         </subviews>
@@ -58,10 +58,10 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fxf-bX-PaZ" secondAttribute="trailing" constant="60" id="HpX-HA-a4t"/>
                             <constraint firstItem="aIE-4R-xmf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="I5c-dY-x0y"/>
                             <constraint firstItem="bFT-ef-bdY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="UED-Po-CMC"/>
-                            <constraint firstItem="aIE-4R-xmf" firstAttribute="top" secondItem="fxf-bX-PaZ" secondAttribute="bottom" constant="50" id="hqi-4b-jC0"/>
+                            <constraint firstItem="aIE-4R-xmf" firstAttribute="top" secondItem="fxf-bX-PaZ" secondAttribute="bottom" constant="40" id="hqi-4b-jC0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aIE-4R-xmf" secondAttribute="trailing" constant="30" id="qPK-Ff-LtE"/>
                             <constraint firstItem="kqn-LZ-x75" firstAttribute="top" secondItem="aIE-4R-xmf" secondAttribute="bottom" constant="30" id="qZi-5K-gMr"/>
-                            <constraint firstItem="fxf-bX-PaZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="rZt-qo-hwi"/>
+                            <constraint firstItem="fxf-bX-PaZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="70" id="rZt-qo-hwi"/>
                             <constraint firstItem="bFT-ef-bdY" firstAttribute="top" secondItem="aIE-4R-xmf" secondAttribute="bottom" constant="30" id="w3a-qh-QOt"/>
                         </constraints>
                     </view>
