@@ -17,6 +17,7 @@
 		4F02540125ABE53500E3B78A /* __MyAlbumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02540025ABE53500E3B78A /* __MyAlbumUITests.swift */; };
 		4F02541325ABE68A00E3B78A /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02541225ABE68A00E3B78A /* Images.swift */; };
 		4F02541B25ABE7DF00E3B78A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02541A25ABE7DF00E3B78A /* PhotoCollectionViewCell.swift */; };
+		4F4F39D225ADB55A0052E6D3 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F39D125ADB55A0052E6D3 /* PhotoDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		4F02540225ABE53500E3B78A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F02541225ABE68A00E3B78A /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		4F02541A25ABE7DF00E3B78A /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		4F4F39D125ADB55A0052E6D3 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,10 +105,10 @@
 		4F0253DD25ABE53300E3B78A /* 4.MyAlbum */ = {
 			isa = PBXGroup;
 			children = (
-				4F02541125ABE66E00E3B78A /* Models */,
 				4F0253DE25ABE53300E3B78A /* AppDelegate.swift */,
 				4F0253E025ABE53300E3B78A /* SceneDelegate.swift */,
-				4F0253E225ABE53300E3B78A /* ViewController.swift */,
+				4F02541125ABE66E00E3B78A /* Models */,
+				4F4F39D025ADB5310052E6D3 /* Controller */,
 				4F0253E425ABE53300E3B78A /* Main.storyboard */,
 				4F0253E725ABE53500E3B78A /* Assets.xcassets */,
 				4F0253E925ABE53500E3B78A /* LaunchScreen.storyboard */,
@@ -140,6 +142,15 @@
 				4F02541A25ABE7DF00E3B78A /* PhotoCollectionViewCell.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4F4F39D025ADB5310052E6D3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4F0253E225ABE53300E3B78A /* ViewController.swift */,
+				4F4F39D125ADB55A0052E6D3 /* PhotoDetailViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4F39D225ADB55A0052E6D3 /* PhotoDetailViewController.swift in Sources */,
 				4F0253E325ABE53300E3B78A /* ViewController.swift in Sources */,
 				4F02541B25ABE7DF00E3B78A /* PhotoCollectionViewCell.swift in Sources */,
 				4F02541325ABE68A00E3B78A /* Images.swift in Sources */,
