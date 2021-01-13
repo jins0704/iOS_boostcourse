@@ -13,6 +13,16 @@ class ViewController: UIViewController,UICollectionViewDataSource,UICollectionVi
     
     @IBOutlet weak var collectionview: UICollectionView!
     
+    //다음 뷰로 이동 가능여부
+    var goNext : Bool?
+    
+    //버튼정보
+    @IBOutlet weak var selectButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var heartButton: UIBarButtonItem!
+    @IBOutlet weak var trashButton: UIBarButtonItem!
+    @IBOutlet weak var myToolbar: UIToolbar!
+    
     //앨범 정보
     var fetchResult :
         PHFetchResult<PHAsset>!
@@ -23,7 +33,10 @@ class ViewController: UIViewController,UICollectionViewDataSource,UICollectionVi
     let half : Double  = Double(UIScreen.main.bounds.width/2 - 10)
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        myToolbar.isHidden = true
+        goNext = true
         
         collectionview.dataSource = self
         collectionview.delegate = self
@@ -89,11 +102,12 @@ class ViewController: UIViewController,UICollectionViewDataSource,UICollectionVi
         
         //카메라롤 목록
         cameraRoll = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
-        print(cameraRoll.count)
+        
         guard let cameraRollColletction = cameraRoll.firstObject else {
             print("cameraRoll error")
             return
         }
+        print(cameraRollColletction) //Recents
         
         //정렬 - 최신순
         let fetchOption = PHFetchOptions()
@@ -101,12 +115,33 @@ class ViewController: UIViewController,UICollectionViewDataSource,UICollectionVi
         
         //목록 다 가져와서 fetchResult에 저장
         self.fetchResult = PHAsset.fetchAssets(in: cameraRollColletction, options: nil)
-        
-        print(fetchResult.count)
     }
     
     //CollectionView
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell else{fatalError()}
+        if goNext == false{
+            collectionview.allowsMultipleSelection = true
+            print("\(cell.photoLabel.text!) 색상해제")
+            cell.checkSelected = false
+            cell.backgroundColor = nil
+        }
+    }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell else{fatalError()}
+        
+        if goNext == false{
+            collectionview.allowsMultipleSelection = true
+            print("\(cell.photoLabel.text!) 색상변경")
+            cell.checkSelected = true
+            cell.backgroundColor = UIColor.lightGray
+        }else{
+            collectionview.allowsMultipleSelection = false
+            performSegue(withIdentifier: "segue", sender: cell)
+        }
+        
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.fetchResult?.count ?? 0
     }
@@ -119,13 +154,13 @@ class ViewController: UIViewController,UICollectionViewDataSource,UICollectionVi
             return UICollectionViewCell()
         }
         
+        //let asset : PHAsset = fetchResult.object(at: indexPath.item)
         let asset : PHAsset = fetchResult.object(at: indexPath.item)
         //사진 요청
         imageManager.requestImage(for: asset, targetSize: CGSize(width:50, height: 50), contentMode: .aspectFit, options: nil, resultHandler: {asset, _ in
             let num = indexPath.item + 1
             cell.imageView?.image = asset
             cell.photoLabel.text = "사진" + " \(num)"
-            
         })
         
         //이미지 잘 가져왔는지 확인차
@@ -143,6 +178,44 @@ class ViewController: UIViewController,UICollectionViewDataSource,UICollectionVi
         next.photos = fetchResult
         next.num = index.item
     }
+    
+    //버튼에 따른 동작들
+    @IBAction func selectPhoto(_ sender: Any) {
+        if selectButton.title == "선택"{
+            selectButton.title = "취소"
+            goNext = false
+            myToolbar.isHidden = false
+        }else{
+            selectButton.title = "선택"
+            goNext = true
+            myToolbar.isHidden = true
+            
+            for i in 0..<fetchResult.count{
+                let checkCell : PhotoCollectionViewCell = collectionview.cellForItem(at: [0,i]) as! PhotoCollectionViewCell
+                if checkCell.checkSelected == true{
+                    checkCell.checkSelected = false
+                    checkCell.backgroundColor = nil
+                }
+            }
+        }
+    }
+    
+    @IBAction func heartPressed(_ sender: Any) {
+        if heartButton.image == UIImage(systemName: "heart"){
+            heartButton.image = UIImage(systemName: "heart.fill")
+
+        }else{
+            heartButton.image = UIImage(systemName: "heart")
+        }
+    }
+    @IBAction func TrashPressed(_ sender: Any) {
+        
+        var asset = [PHAsset]()
+        asset.append(fetchResult.object(at: 1))
+        PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.deleteAssets(asset as NSFastEnumeration)}, completionHandler: nil)
+    }
+    
+ 
 }
 
 

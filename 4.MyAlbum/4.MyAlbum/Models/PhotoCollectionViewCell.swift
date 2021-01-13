@@ -11,7 +11,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var photoLabel: UILabel!
-    
+    var checkSelected : Bool?
     override func awakeFromNib() {
            super.awakeFromNib()
            // Initialization code

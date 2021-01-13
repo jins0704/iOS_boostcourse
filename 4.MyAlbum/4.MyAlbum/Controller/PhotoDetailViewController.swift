@@ -23,8 +23,7 @@ class PhotoDetailViewController: UIViewController{
         let asset : PHAsset = photos.object(at: num)
         //사진 요청
         let imageManager = PHCachingImageManager()
-        imageManager.requestImage(for: asset, targetSize: CGSize(width:150, height: 150), contentMode: .aspectFit, options: nil, resultHandler: {asset, _
-                                    in self.imageView?.image = asset
+        imageManager.requestImage(for: asset, targetSize: CGSize(width:150, height: 150), contentMode: .aspectFit, options: nil, resultHandler: {asset, _ in self.imageView?.image = asset
             })
         
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(PhotoDetailViewController.doPinch(_:)))
