@@ -7,6 +7,9 @@
 
 import UIKit
 
+let baseURL : String = "https://connect-boxoffice.run.goorm.io"
+var currentURL : String = "\(baseURL)/movies"
+
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     var movieList : [Movie]  = []
@@ -15,36 +18,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let cellIdentifier = "tablecell"
     
     override func viewDidAppear(_ animated: Bool) {
-        guard let url : URL = URL(string: "https://connect-boxoffice.run.goorm.io/movies") else{
-            return
-        }
-        
-        let session : URLSession = URLSession(configuration: .default)
-        let dataTask : URLSessionDataTask = session.dataTask(with: url){
-            (data: Data?, response : URLResponse?, error: Error?) in
-            
-            if let error = error{
-                print(error)
-                return
-            }
-            
-            guard let data = data else{return}
-            
-            do{
-                let apiResponse: APIResponse = try JSONDecoder().decode(APIResponse.self, from: data)
-                self.movieList = apiResponse.movies
-                
-                DispatchQueue.main.async {
-                    self.movieTableView.reloadData()
-                }
-            }catch(let err){
-                print(err.localizedDescription)
-            }
-        }
-        
-        dataTask.resume()
-        
-        
+        responseAPI(current: currentURL)
     }
     
     override func viewDidLoad() {
@@ -69,10 +43,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let movie : Movie = self.movieList[indexPath.row]
         
         let cell : TableViewCell = movieTableView.dequeueReusableCell(withIdentifier: "tablecell", for: indexPath) as! TableViewCell
-       
-        cell.reservationGrade = movie.reservation_grade
-        cell.reservationRating = movie.reservation_rate
+        
         cell.userRating = movie.user_rating
+        cell.id = movie.id
         
         cell.detailLabel.text = "평점 : \(movie.user_rating!)  예매순위 : \(movie.reservation_grade!) 예매율 : \(movie.reservation_rate!)"
        
@@ -107,16 +80,22 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func selectSorting(_ sender: Any) {
         let optionMenu = UIAlertController(title: "정렬방식 선택", message: "영화를 어떤 순서로 정렬할까요?", preferredStyle: .actionSheet)
         
-        let Action1 = UIAlertAction(title: "예매율", style: .default, handler: {
+        let Action1 = UIAlertAction(title: "예매순위", style: .default, handler: {
                  (alert: UIAlertAction!) -> Void in
+            currentURL = "\(baseURL)/movies?order_type=0"
+            self.responseAPI(current: currentURL)
         })
 
         let Action2 = UIAlertAction(title: "큐레이션", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
+            currentURL = "\(baseURL)/movies?order_type=1"
+            self.responseAPI(current: currentURL)
         })
       
         let Action3 = UIAlertAction(title: "개봉일", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
+            currentURL = "\(baseURL)/movies?order_type=2"
+            self.responseAPI(current: currentURL)
         })
        
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: {
@@ -131,6 +110,36 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.present(optionMenu, animated: true, completion: nil)
     }
 
+    func responseAPI(current : String){
+        guard let url : URL = URL(string: current) else{
+            return
+        }
+        
+        let session : URLSession = URLSession(configuration: .default)
+        let dataTask : URLSessionDataTask = session.dataTask(with: url){
+            (data: Data?, response : URLResponse?, error: Error?) in
+            
+            if let error = error{
+                print(error)
+                return
+            }
+            
+            guard let data = data else{return}
+            
+            do{
+                let apiResponse: APIResponse = try JSONDecoder().decode(APIResponse.self, from: data)
+                self.movieList = apiResponse.movies
+                
+                DispatchQueue.main.async {
+                    self.movieTableView.reloadData()
+                }
+            }catch(let err){
+                print(err.localizedDescription)
+            }
+        }
+        dataTask.resume()
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let next : DetailTableViewController = segue.destination as? DetailTableViewController else{
             return
@@ -139,13 +148,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         guard let cell : TableViewCell = sender as? TableViewCell else{
             return
         }
-    
-        next.userRating = cell.userRating
-        next.reservationRating = cell.reservationRating
-        next.reservationGrade = cell.reservationGrade
+        next.id = cell.id
         next.gradeimage = cell.gradeImage.image
-        next.date = cell.dateLabel.text
         next.movieimage = cell.movieImage.image
-        next.movietitle = cell.titleLabel.text
+        next.userRating = cell.userRating
     }
 }

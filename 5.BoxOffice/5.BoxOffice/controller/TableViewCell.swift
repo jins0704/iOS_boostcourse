@@ -15,9 +15,8 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var gradeImage: UIImageView!
     
+    var id : String?
     var userRating : Double?
-    var reservationRating : Double?
-    var reservationGrade : Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
