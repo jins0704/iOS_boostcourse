@@ -108,7 +108,7 @@ class DetailTableViewController: UIViewController {
         
         starGrade()
         
-        guard let url : URL = URL(string: "\(baseURL)/movie?id=\(id!)") else{
+        guard let url : URL = URL(string: "\(baseURL)movie?id=\(id!)") else{
             return
         }
 
@@ -160,6 +160,13 @@ class DetailTableViewController: UIViewController {
             return
         }
         next.movieID = id
+        next.starImage1 = star1.image
+        next.starImage2 = star2.image
+        next.starImage3 = star3.image
+        next.starImage4 = star4.image
+        next.starImage5 = star5.image
+        next.movieName = movieTitle.text
+        next.movieGrade = gradeimage
     }
     /*
     // MARK: - Navigation

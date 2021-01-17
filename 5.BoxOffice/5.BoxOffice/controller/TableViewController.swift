@@ -7,8 +7,8 @@
 
 import UIKit
 
-let baseURL : String = "https://connect-boxoffice.run.goorm.io"
-var currentURL : String = "\(baseURL)/movies"
+let baseURL : String = "https://connect-boxoffice.run.goorm.io/"
+var currentURL : String = "\(baseURL)movies"
 
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
@@ -82,19 +82,19 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let Action1 = UIAlertAction(title: "예매순위", style: .default, handler: {
                  (alert: UIAlertAction!) -> Void in
-            currentURL = "\(baseURL)/movies?order_type=0"
+            currentURL = "\(baseURL)movies?order_type=0"
             self.responseAPI(current: currentURL)
         })
 
         let Action2 = UIAlertAction(title: "큐레이션", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-            currentURL = "\(baseURL)/movies?order_type=1"
+            currentURL = "\(baseURL)movies?order_type=1"
             self.responseAPI(current: currentURL)
         })
       
         let Action3 = UIAlertAction(title: "개봉일", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-            currentURL = "\(baseURL)/movies?order_type=2"
+            currentURL = "\(baseURL)movies?order_type=2"
             self.responseAPI(current: currentURL)
         })
        
