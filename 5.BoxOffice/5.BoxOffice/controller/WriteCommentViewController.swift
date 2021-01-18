@@ -7,8 +7,9 @@
 
 import UIKit
 
-class WriteCommentViewController: UIViewController,UITextFieldDelegate {
+class WriteCommentViewController: UIViewController,UITextFieldDelegate,UITextViewDelegate {
 
+    var textCheck = 0
     var movieName : String?
     var gradeImage : UIImage?
     
@@ -23,12 +24,23 @@ class WriteCommentViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var grade: UIImageView!
     @IBOutlet weak var completeButton: UIBarButtonItem!
     
+    @IBOutlet weak var nicknameLabel: UITextField!
+    @IBOutlet weak var commentField: UITextView!
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textCheck == 0{
+            textView.text = nil
+            textCheck += 1
+        }
+    }
+
     override func viewDidLoad() {
         nameLabel.text = movieName
         grade.image =  gradeImage
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        commentField.delegate = self
         gradeText.delegate = self
         completeButton.isEnabled = false
     }

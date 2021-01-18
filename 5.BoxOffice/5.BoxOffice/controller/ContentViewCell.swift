@@ -20,6 +20,8 @@ class ContentViewCell: UITableViewCell {
     @IBOutlet weak var star4: UIImageView!
     @IBOutlet weak var star5: UIImageView!
     
+    var cellrating : Double?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

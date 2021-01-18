@@ -449,7 +449,11 @@
                                                 <action selector="cancelButton:" destination="TcY-Sx-uoz" id="f53-sg-JjS"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="완료" id="Wkx-Xa-dDS"/>
+                                        <barButtonItem key="rightBarButtonItem" title="완료" id="Wkx-Xa-dDS">
+                                            <connections>
+                                                <segue destination="bnv-B7-t1a" kind="unwind" unwindAction="unwindCommentWithSegue:" id="GFa-PI-FA6"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -493,12 +497,26 @@
                                     </imageView>
                                 </subviews>
                             </stackView>
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임을 작성하세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ger-Vf-1EQ">
+                                <rect key="frame" x="10" y="294" width="394" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="한줄평을 작성하세요." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="quo-gp-wqi">
+                                <rect key="frame" x="10" y="446" width="394" height="128"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bVk-87-MSL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0fZ-Rh-DkY" firstAttribute="top" secondItem="4Ha-IW-K35" secondAttribute="bottom" constant="27" id="1J9-LL-6sQ"/>
                             <constraint firstItem="nGM-gv-QlB" firstAttribute="leading" secondItem="bVk-87-MSL" secondAttribute="leading" constant="20" id="26r-D9-ffW"/>
+                            <constraint firstItem="bVk-87-MSL" firstAttribute="bottom" secondItem="quo-gp-wqi" secondAttribute="bottom" constant="10" id="3za-Lg-r5V"/>
+                            <constraint firstItem="quo-gp-wqi" firstAttribute="leading" secondItem="bVk-87-MSL" secondAttribute="leading" constant="10" id="62M-hX-Sd7"/>
                             <constraint firstItem="4Ha-IW-K35" firstAttribute="top" secondItem="0su-WI-Ctc" secondAttribute="bottom" constant="25" id="DVM-xZ-gUv"/>
                             <constraint firstItem="0fZ-Rh-DkY" firstAttribute="leading" secondItem="nGM-gv-QlB" secondAttribute="trailing" constant="20" id="E3o-6w-Igc"/>
                             <constraint firstItem="erz-1g-0O1" firstAttribute="leading" secondItem="bVk-87-MSL" secondAttribute="leading" constant="20" id="Evl-HZ-K0o"/>
@@ -507,17 +525,24 @@
                             <constraint firstItem="bVk-87-MSL" firstAttribute="trailing" secondItem="5Em-f7-Ogs" secondAttribute="trailing" constant="20" id="ObX-ae-E67"/>
                             <constraint firstItem="5Em-f7-Ogs" firstAttribute="leading" secondItem="bVk-87-MSL" secondAttribute="leading" constant="20" id="OdW-Y3-1zc"/>
                             <constraint firstItem="5Em-f7-Ogs" firstAttribute="top" secondItem="0fZ-Rh-DkY" secondAttribute="bottom" constant="18" id="R3I-Zy-gop"/>
+                            <constraint firstItem="quo-gp-wqi" firstAttribute="top" secondItem="Ger-Vf-1EQ" secondAttribute="bottom" constant="10" id="ShE-Nv-Fe4"/>
                             <constraint firstItem="0su-WI-Ctc" firstAttribute="leading" secondItem="bVk-87-MSL" secondAttribute="leading" id="b7i-rK-DbW"/>
                             <constraint firstItem="4Ha-IW-K35" firstAttribute="leading" secondItem="erz-1g-0O1" secondAttribute="trailing" constant="7" id="c9o-Ul-rQk"/>
                             <constraint firstItem="erz-1g-0O1" firstAttribute="top" secondItem="0su-WI-Ctc" secondAttribute="bottom" constant="20" id="dGi-Ic-pxf"/>
                             <constraint firstItem="0su-WI-Ctc" firstAttribute="top" secondItem="bVk-87-MSL" secondAttribute="top" id="dbC-4i-nfo"/>
+                            <constraint firstItem="Ger-Vf-1EQ" firstAttribute="top" secondItem="5Em-f7-Ogs" secondAttribute="bottom" constant="20" id="jlo-x2-0NZ"/>
+                            <constraint firstItem="Ger-Vf-1EQ" firstAttribute="leading" secondItem="bVk-87-MSL" secondAttribute="leading" constant="10" id="mzZ-Ba-5Is"/>
+                            <constraint firstItem="bVk-87-MSL" firstAttribute="trailing" secondItem="Ger-Vf-1EQ" secondAttribute="trailing" constant="10" id="qX2-1h-3VF"/>
+                            <constraint firstItem="bVk-87-MSL" firstAttribute="trailing" secondItem="quo-gp-wqi" secondAttribute="trailing" constant="10" id="vtv-oa-m91"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="commentField" destination="quo-gp-wqi" id="xpa-xW-ZWF"/>
                         <outlet property="completeButton" destination="Wkx-Xa-dDS" id="3mQ-yz-kd8"/>
                         <outlet property="grade" destination="4Ha-IW-K35" id="Rwp-E6-vY3"/>
                         <outlet property="gradeText" destination="0fZ-Rh-DkY" id="JNj-Bf-GdP"/>
                         <outlet property="nameLabel" destination="erz-1g-0O1" id="Hh4-fR-ABh"/>
+                        <outlet property="nicknameLabel" destination="Ger-Vf-1EQ" id="uIo-av-ejd"/>
                         <outlet property="star1" destination="DRc-vj-UlO" id="OjR-9Z-rVJ"/>
                         <outlet property="star2" destination="Wmf-S7-rHO" id="PDO-TR-Mbj"/>
                         <outlet property="star3" destination="aaa-E8-764" id="f3i-VK-Zpy"/>
@@ -526,6 +551,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ulq-WU-OhE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="bnv-B7-t1a" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4769.5652173913049" y="156.69642857142856"/>
         </scene>
@@ -610,6 +636,9 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

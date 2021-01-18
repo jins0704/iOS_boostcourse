@@ -17,4 +17,10 @@ struct MovieComment : Codable{
     var timestamp : Double?
     var writer : String?
     var movie_id : String?
+
+    init(writer : String, rating : Double, contents : String){
+        self.writer = writer
+        self.rating = rating
+        self.contents = contents
+    }
 }
