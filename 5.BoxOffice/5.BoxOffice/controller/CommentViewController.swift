@@ -18,6 +18,8 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
     var starImage3 : UIImage?
     var starImage4 : UIImage?
     var starImage5 : UIImage?
+
+    var newCheck = false
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return movieName
@@ -30,6 +32,17 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
         let comment : MovieComment = self.commentList[indexPath.row]
         
         let cell : ContentViewCell = contentTable.dequeueReusableCell(withIdentifier: "commentcell", for: indexPath) as! ContentViewCell
+       
+        if newCheck == true{
+            
+            newCheck = false
+            
+            let alert = UIAlertController(title: "한줄평 작성", message: "등록되었습니다.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .default, handler: nil)
+        
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
+        }
         
         cell.nameLabel.text = "\(comment.writer!)"
         cell.contentLabel.text = comment.contents
@@ -103,6 +116,7 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
     }
     
     @IBAction func unwindComment(segue : UIStoryboardSegue){
+       
         let before = segue.source as! WriteCommentViewController
         let nickname = before.nicknameLabel.text!
         let comment = before.commentField.text!
@@ -111,8 +125,10 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
         guard let r = Double(rating)else {
                     return
         }
+        
         let newcomment = MovieComment(writer: nickname, rating: r,contents : comment)
         commentList.append(newcomment)
+        newCheck = true
         
         self.contentTable.reloadData()
     }

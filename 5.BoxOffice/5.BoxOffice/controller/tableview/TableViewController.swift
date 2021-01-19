@@ -141,7 +141,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let next : DetailTableViewController = segue.destination as? DetailTableViewController else{
+        guard let next : DetailViewController = segue.destination as? DetailViewController else{
             return
         }
         

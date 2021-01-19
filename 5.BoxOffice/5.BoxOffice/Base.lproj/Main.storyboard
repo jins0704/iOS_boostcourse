@@ -109,10 +109,10 @@
             </objects>
             <point key="canvasLocation" x="1834.7826086956522" y="-279.24107142857139"/>
         </scene>
-        <!--Detail Table View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="rdq-rM-fJ3">
             <objects>
-                <viewController id="wGs-pC-zyC" customClass="DetailTableViewController" customModule="__BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wGs-pC-zyC" customClass="DetailViewController" customModule="__BoxOffice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JWe-aH-FxP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

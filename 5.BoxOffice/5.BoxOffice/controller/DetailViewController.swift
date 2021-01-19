@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailTableViewController: UIViewController {
+class DetailViewController: UIViewController {
 
     var userRating : Double?
     var gradeimage: UIImage?

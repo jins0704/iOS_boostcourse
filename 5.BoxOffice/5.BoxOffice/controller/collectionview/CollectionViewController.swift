@@ -152,7 +152,7 @@ class CollectionViewController: UIViewController,UICollectionViewDelegate,UIColl
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let next : DetailTableViewController = segue.destination as? DetailTableViewController else{
+        guard let next : DetailViewController = segue.destination as? DetailViewController else{
             return
         }
         
