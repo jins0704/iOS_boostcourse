@@ -9,6 +9,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    var starchanger = Star()
+    
     var userRating : Double?
     var gradeimage: UIImage?
     var movieimage : UIImage?
@@ -35,78 +37,15 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var star4: UIImageView!
     @IBOutlet weak var star5: UIImageView!
     
-    func starGrade(){
-        
-        star1.image = #imageLiteral(resourceName: "ic_star_label")
-        star2.image = #imageLiteral(resourceName: "ic_star_label")
-        star3.image = #imageLiteral(resourceName: "ic_star_label")
-        star4.image = #imageLiteral(resourceName: "ic_star_label")
-        star5.image = #imageLiteral(resourceName: "ic_star_label")
-        
-        guard let rate = userRating else{
-            return
-        }
-        
-        if rate < 1{
-            star1.image = #imageLiteral(resourceName: "ic_star_large")
-            star2.image = #imageLiteral(resourceName: "ic_star_large")
-            star3.image = #imageLiteral(resourceName: "ic_star_large")
-            star4.image = #imageLiteral(resourceName: "ic_star_large")
-            star5.image = #imageLiteral(resourceName: "ic_star_large")
-        }
-        else if rate < 2{
-            star1.image = #imageLiteral(resourceName: "ic_star_large_half")
-            star2.image = #imageLiteral(resourceName: "ic_star_large")
-            star3.image = #imageLiteral(resourceName: "ic_star_large")
-            star4.image = #imageLiteral(resourceName: "ic_star_large")
-            star5.image = #imageLiteral(resourceName: "ic_star_large")
-        }
-        else if rate < 3{
-            star2.image = #imageLiteral(resourceName: "ic_star_large")
-            star3.image = #imageLiteral(resourceName: "ic_star_large")
-            star4.image = #imageLiteral(resourceName: "ic_star_large")
-            star5.image = #imageLiteral(resourceName: "ic_star_large")
-        }
-        else if rate < 4{
-            star2.image = #imageLiteral(resourceName: "ic_star_large_half")
-            star3.image = #imageLiteral(resourceName: "ic_star_large")
-            star4.image = #imageLiteral(resourceName: "ic_star_large")
-            star5.image = #imageLiteral(resourceName: "ic_star_large")
-        }
-        else if rate < 5{
-            star3.image = #imageLiteral(resourceName: "ic_star_large")
-            star4.image = #imageLiteral(resourceName: "ic_star_large")
-            star5.image = #imageLiteral(resourceName: "ic_star_large")
-        }
-        else if rate < 6{
-            star3.image = #imageLiteral(resourceName: "ic_star_large_half")
-            star4.image = #imageLiteral(resourceName: "ic_star_large")
-            star5.image = #imageLiteral(resourceName: "ic_star_large")
-        }
-        else if rate < 7{
-            star4.image = #imageLiteral(resourceName: "ic_star_large")
-            star5.image = #imageLiteral(resourceName: "ic_star_large")
-        }
-        else if rate < 8{
-            star4.image = #imageLiteral(resourceName: "ic_star_large_half")
-            star5.image = #imageLiteral(resourceName: "ic_star_large")
-        }
-        else if rate < 9{
-            star5.image = #imageLiteral(resourceName: "ic_star_large")
-        }
-        
-        else if rate < 10{
-            star5.image = #imageLiteral(resourceName: "ic_star_large_half")
-        }
-        else{
-            
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        starGrade()
+        starchanger.starGrade(rate: userRating!)
+        star1.image = starchanger.star1
+        star2.image = starchanger.star2
+        star3.image = starchanger.star3
+        star4.image = starchanger.star4
+        star5.image = starchanger.star5
         
         guard let url : URL = URL(string: "\(baseURL)movie?id=\(id!)") else{
             return
@@ -126,7 +65,7 @@ class DetailViewController: UIViewController {
             do{
                 let apiResponse2 : MovieDetail = try JSONDecoder().decode(MovieDetail.self, from: data)
                 self.selectmovie = apiResponse2.self
-                print(self.selectmovie.title!)
+
                 DispatchQueue.main.async {
                     self.title = self.selectmovie.title!
                     self.movieDate.text =
