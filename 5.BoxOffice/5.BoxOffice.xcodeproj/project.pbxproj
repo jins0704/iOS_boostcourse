@@ -26,6 +26,8 @@
 		4FD92C6A25B2E033005D2C39 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD92C6925B2E033005D2C39 /* CommentViewController.swift */; };
 		4FD92C6F25B2E590005D2C39 /* ContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD92C6E25B2E590005D2C39 /* ContentViewCell.swift */; };
 		4FD92C7425B32884005D2C39 /* MovieComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD92C7325B32884005D2C39 /* MovieComment.swift */; };
+		4FFFAD6B25C10DD5001D4126 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFFAD6A25C10DD5001D4126 /* APIController.swift */; };
+		4FFFAD9B25C185A5001D4126 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFFAD9A25C185A5001D4126 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		4FD92C6925B2E033005D2C39 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		4FD92C6E25B2E590005D2C39 /* ContentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCell.swift; sourceTree = "<group>"; };
 		4FD92C7325B32884005D2C39 /* MovieComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieComment.swift; sourceTree = "<group>"; };
+		4FFFAD6A25C10DD5001D4126 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
+		4FFFAD9A25C185A5001D4126 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 				4FD92C5C25B2873E005D2C39 /* MovieDetail.swift */,
 				4FD92C7325B32884005D2C39 /* MovieComment.swift */,
 				4F7A241425B92D73007B8000 /* Star.swift */,
+				4FFFAD6A25C10DD5001D4126 /* APIController.swift */,
+				4FFFAD9A25C185A5001D4126 /* Constants.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -330,12 +336,14 @@
 				4FD92C6F25B2E590005D2C39 /* ContentViewCell.swift in Sources */,
 				4F45DFB625B43E9300DEFEC0 /* WriteCommentViewController.swift in Sources */,
 				4FD92C5D25B2873E005D2C39 /* MovieDetail.swift in Sources */,
+				4FFFAD9B25C185A5001D4126 /* Constants.swift in Sources */,
 				4F4C135825B05AE4007BCB7E /* AppDelegate.swift in Sources */,
 				4F26C72325B0870600C47297 /* TableViewCell.swift in Sources */,
 				4F40F34F25B678AD00DDC044 /* CollectionViewCell.swift in Sources */,
 				4FD92C7425B32884005D2C39 /* MovieComment.swift in Sources */,
 				4F26C71E25B086C800C47297 /* TableViewController.swift in Sources */,
 				4F4C135A25B05AE4007BCB7E /* SceneDelegate.swift in Sources */,
+				4FFFAD6B25C10DD5001D4126 /* APIController.swift in Sources */,
 				4F26C72825B087CB00C47297 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

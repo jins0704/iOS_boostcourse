@@ -7,8 +7,10 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
-
+class DetailViewController: UIViewController, APIControllerDelegate {
+    
+    var APIManager = APIController()
+    
     var starchanger = Star()
     
     var userRating : Double?
@@ -37,9 +39,15 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var star4: UIImageView!
     @IBOutlet weak var star5: UIImageView!
     
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            self.gradeImage.image = self.gradeimage
+            self.movieImage.image = self.movieimage
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        APIManager.delegate = self
         starchanger.starGrade(rate: userRating!)
         star1.image = starchanger.star1
         star2.image = starchanger.star2
@@ -47,51 +55,7 @@ class DetailViewController: UIViewController {
         star4.image = starchanger.star4
         star5.image = starchanger.star5
         
-        guard let url : URL = URL(string: "\(baseURL)movie?id=\(id!)") else{
-            return
-        }
-
-        let session : URLSession = URLSession(configuration: .default)
-        let dataTask : URLSessionDataTask = session.dataTask(with: url){
-            (data: Data?, response : URLResponse?, error: Error?) in
-            
-            if let error = error{
-                print(error)
-                return
-            }
-            
-            guard let data = data else{return}
-            
-            do{
-                let apiResponse2 : MovieDetail = try JSONDecoder().decode(MovieDetail.self, from: data)
-                self.selectmovie = apiResponse2.self
-
-                DispatchQueue.main.async {
-                    self.title = self.selectmovie.title!
-                    self.movieDate.text =
-                        "\(self.selectmovie.date!) 개봉"
-                    self.movieTitle.text = self.selectmovie.title!
-                    self.reservationLabel.text = "\(self.selectmovie.reservation_grade!)위 \(self.selectmovie.reservation_rate!)%"
-                    self.genreLabel.text = "\(self.selectmovie.genre!)/ \(self.selectmovie.duration!)"
-                    self.movieGrade.text = "\(self.selectmovie.user_rating!)"
-                    self.movieNumber.text = "\(self.selectmovie.audience!)"
-                    self.movieContent.text = "줄거리 :\n\n" + "\(self.selectmovie.synopsis!)"
-                    self.movieDirector.text = "감독 : \(self.selectmovie.director!)"
-                    self.movieActor.text = "배우 : \(self.selectmovie.actor!)"
-                }
-               
-            }catch(let err){
-                print(err.localizedDescription)
-            }
-        }
-        
-        dataTask.resume()
-        
-        gradeImage.image = gradeimage
-        movieImage.image = movieimage
-        
-        
-        // Do any additional setup after loading the view.
+        APIManager.responseAPI(current: "\(Constants.baseURL)movie?id=\(id!)")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -102,14 +66,28 @@ class DetailViewController: UIViewController {
         next.movieName = movieTitle.text
         next.movieGrade = gradeimage
     }
-    /*
-    // MARK: - Navigation
+    
+    func UpdateView(_ apicontrol: APIController, _ dd: Data) {
+        do{
+            let apiResponse2 : MovieDetail = try JSONDecoder().decode(MovieDetail.self, from: dd)
+            self.selectmovie = apiResponse2.self
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+            DispatchQueue.main.async {
+                self.title = self.selectmovie.title!
+                self.movieDate.text =
+                    "\(self.selectmovie.date!) 개봉"
+                self.movieTitle.text = self.selectmovie.title!
+                self.reservationLabel.text = "\(self.selectmovie.reservation_grade!)위 \(self.selectmovie.reservation_rate!)%"
+                self.genreLabel.text = "\(self.selectmovie.genre!)/ \(self.selectmovie.duration!)"
+                self.movieGrade.text = "\(self.selectmovie.user_rating!)"
+                self.movieNumber.text = "\(self.selectmovie.audience!)"
+                self.movieContent.text = "줄거리 :\n\n" + "\(self.selectmovie.synopsis!)"
+                self.movieDirector.text = "감독 : \(self.selectmovie.director!)"
+                self.movieActor.text = "배우 : \(self.selectmovie.actor!)"
+            }
+           
+        }catch(let err){
+            print(err.localizedDescription)
+        }
     }
-    */
-
 }

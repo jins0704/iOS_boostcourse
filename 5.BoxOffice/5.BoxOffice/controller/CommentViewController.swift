@@ -7,7 +7,9 @@
 
 import UIKit
 
-class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
+class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, APIControllerDelegate {
+    
+    var APIManager = APIController()
     
     var starchanger = Star()
     
@@ -54,7 +56,6 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         cell.userImage.image = #imageLiteral(resourceName: "ic_user_loading")
         return cell
-        
     }
     
     
@@ -62,33 +63,8 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
     @IBOutlet weak var contentTable: UITableView!
     
     override func viewDidAppear(_ animated: Bool) {
-        guard let url : URL = URL(string: "\(baseURL)comments?movie_id=\(movieID!)") else{
-            return
-        }
         
-        let session : URLSession = URLSession(configuration: .default)
-        let dataTask : URLSessionDataTask = session.dataTask(with: url){
-            (data: Data?, response : URLResponse?, error: Error?) in
-            
-            if let error = error{
-                print(error)
-                return
-            }
-            
-            guard let data = data else{return}
-            
-            do{
-                let apiResponse: APIResponse2 = try JSONDecoder().decode(APIResponse2.self, from: data)
-                self.commentList = apiResponse.comments
-                
-                DispatchQueue.main.async {
-                    self.contentTable.reloadData()
-                }
-            }catch(let err){
-                print(err.localizedDescription)
-            }
-        }
-        dataTask.resume()
+        APIManager.responseAPI(current: "\(Constants.baseURL)comments?movie_id=\(movieID!)")
     }
     
     override func viewDidLoad() {
@@ -96,8 +72,7 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         contentTable.delegate = self
         contentTable.dataSource = self
-
-        // Do any additional setup after loading the view.
+        APIManager.delegate = self
     }
     
 
@@ -118,9 +93,7 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
         let comment = before.commentField.text!
         let rating = before.gradeText.text!
         
-        guard let r = Double(rating)else {
-                    return
-        }
+        guard let r = Double(rating)else {return}
         
         let newcomment = MovieComment(writer: nickname, rating: r,contents : comment)
         commentList.append(newcomment)
@@ -129,14 +102,16 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.contentTable.reloadData()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func UpdateView(_ apicontrol: APIController, _ dd: Data) {
+        do{
+            let apiResponse: APIResponse2 = try JSONDecoder().decode(APIResponse2.self, from: dd)
+           commentList = apiResponse.comments
+            
+            DispatchQueue.main.async {
+                self.contentTable.reloadData()
+            }
+        }catch(let err){
+            print(err.localizedDescription)
+        }
     }
-    */
-
 }

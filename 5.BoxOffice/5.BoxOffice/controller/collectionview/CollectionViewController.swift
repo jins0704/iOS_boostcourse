@@ -7,7 +7,9 @@
 
 import UIKit
 
-class CollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
+class CollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, APIControllerDelegate {
+    
+    var APIManager = APIController()
     
     var movieList : [Movie]  = []
     
@@ -18,7 +20,7 @@ class CollectionViewController: UIViewController,UICollectionViewDelegate,UIColl
     let cellIdentifier = "collectioncell"
     
     override func viewDidAppear(_ animated: Bool) {
-        responseAPI(current: currentURL)
+        APIManager.responseAPI(current: "\(Constants.baseURL)movies")
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -40,18 +42,12 @@ class CollectionViewController: UIViewController,UICollectionViewDelegate,UIColl
         cell.titleLabel.text = movie.title
         cell.dateLabel.text = "개봉일 : \(movie.date!)"
         
-        if movie.grade == 0{
-            cell.gradeImage.image = #imageLiteral(resourceName: "ic_allages")
-        }
-        if movie.grade == 19{
-            cell.gradeImage.image = #imageLiteral(resourceName: "ic_19")
-        }
-        if movie.grade == 12{
-            cell.gradeImage.image = #imageLiteral(resourceName: "ic_12")
-        }
-        if movie.grade == 15{
-            cell.gradeImage.image = #imageLiteral(resourceName: "ic_15")
-        }
+        if movie.grade == 0{cell.gradeImage.image = #imageLiteral(resourceName: "ic_allages")}
+        else if movie.grade == 19{cell.gradeImage.image = #imageLiteral(resourceName: "ic_19")}
+        else if movie.grade == 12{cell.gradeImage.image = #imageLiteral(resourceName: "ic_12")}
+        else if movie.grade == 15{cell.gradeImage.image = #imageLiteral(resourceName: "ic_15")}
+        else{}
+        
         if let url = URL(string: movie.thumb!){
             do{
                 let urldata = try Data(contentsOf: url)
@@ -61,17 +57,15 @@ class CollectionViewController: UIViewController,UICollectionViewDelegate,UIColl
                 print(error)
             }
         }
-        
         return cell
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
-        
+        APIManager.delegate = self
         settingFlowlayout()
         // Do any additional setup after loading the view.
     }
@@ -81,20 +75,17 @@ class CollectionViewController: UIViewController,UICollectionViewDelegate,UIColl
         
         let Action1 = UIAlertAction(title: "예매순위", style: .default, handler: {
                  (alert: UIAlertAction!) -> Void in
-            currentURL = "\(baseURL)movies?order_type=0"
-            self.responseAPI(current: currentURL)
+            self.APIManager.responseAPI(current: "\(Constants.baseURL)movies?order_type=0")
         })
 
         let Action2 = UIAlertAction(title: "큐레이션", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-            currentURL = "\(baseURL)movies?order_type=1"
-            self.responseAPI(current: currentURL)
+            self.APIManager.responseAPI(current: "\(Constants.baseURL)movies?order_type=1")
         })
       
         let Action3 = UIAlertAction(title: "개봉일", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-            currentURL = "\(baseURL)movies?order_type=2"
-            self.responseAPI(current: currentURL)
+            self.APIManager.responseAPI(current: "\(Constants.baseURL)movies?order_type=2")
         })
        
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: {
@@ -109,37 +100,6 @@ class CollectionViewController: UIViewController,UICollectionViewDelegate,UIColl
         self.present(optionMenu, animated: true, completion: nil)
     }
 
-    func responseAPI(current : String){
-        guard let url : URL = URL(string: current) else{
-            return
-        }
-        
-        let session : URLSession = URLSession(configuration: .default)
-        let dataTask : URLSessionDataTask = session.dataTask(with: url){
-            (data: Data?, response : URLResponse?, error: Error?) in
-            
-            if let error = error{
-                print(error)
-                return
-            }
-            
-            guard let data = data else{return}
-            
-            do{
-                let apiResponse: APIResponse = try JSONDecoder().decode(APIResponse.self, from: data)
-                self.movieList = apiResponse.movies
-                
-                DispatchQueue.main.async {
-                    self.movieCollectionView.reloadData()
-                }
-            }catch(let err){
-                print("Error?")
-                print(err.localizedDescription)
-            }
-        }
-        dataTask.resume()
-    }
-    
     func settingFlowlayout(){
 
            flowLayout.sectionInset = UIEdgeInsets.zero
@@ -164,14 +124,19 @@ class CollectionViewController: UIViewController,UICollectionViewDelegate,UIColl
         next.movieimage = cell.movieImage.image
         next.userRating = cell.userRating
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func UpdateView(_ apicontrol: APIController, _ dd: Data) {
+       
+        do{
+            let apiResponse: APIResponse = try JSONDecoder().decode(APIResponse.self, from: dd)
+            self.movieList = apiResponse.movies
+              
+            DispatchQueue.main.async {
+                self.movieCollectionView.reloadData()
+            }
+            
+        }catch(let err){
+            print(err.localizedDescription)
+        }
     }
-    */
-
 }

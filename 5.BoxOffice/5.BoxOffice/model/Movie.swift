@@ -10,6 +10,7 @@ import Foundation
 struct APIResponse : Codable{
     let movies : [Movie]
 }
+
 struct Movie : Codable{
     var id : String?
     var reservation_rate : Double?

@@ -50,9 +50,11 @@
      **[Warning] Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view**
 음... 셀이 constraints가 뭔가 이상하다는 것 같은데.. 알고보니 imageview에 고정된 사이즈를 주고 위아래로 Top,Bottom space to constraints를 주었더니 셀의 label이 길어짐에 따라 셀의 높이가 동적으로 바뀌지 못한다는 것이었다. 따라서 label을 기준으로 Top,Bottom space to constraints를 주고 해결. (20210121 수정)
 
-   <img width="100" alt="스크린샷 2021-01-21 오후 3 13 00" src="https://user-images.githubusercontent.com/70695311/105288236-2b853080-5bfb-11eb-8839-9f67ff39a5f4.png">
+   <img width="200" alt="스크린샷 2021-01-21 오후 3 13 00" src="https://user-images.githubusercontent.com/70695311/105288236-2b853080-5bfb-11eb-8839-9f67ff39a5f4.png">
 
-- 기능에 집중하다 보니 코드 구조가 간결하지 못하다. - Star (20210121 수정)
+- 기능에 집중하다 보니 코드 구조가 간결하지 못하다. 
+    - Star (20210121 수정)
+    - APIController, APIControllerDelegate(20211027 수정)
 - 아직 백그라운드 스레드와 메인 스레드에서 처리할 것은 제대로 구분하지 못했다.
 - 네트워킹 (로딩/새로고침)에 따른 표시를 하지 못했다.
 - 추가적인 오류를 발생한다.
