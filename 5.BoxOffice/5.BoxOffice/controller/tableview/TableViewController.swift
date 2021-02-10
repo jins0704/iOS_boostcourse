@@ -9,13 +9,12 @@ import UIKit
 
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,APIControllerDelegate{
 
-    var APIManager = APIController()
     var movieList : [Movie]  = []
     @IBOutlet weak var movieTableView: UITableView!
     let cellIdentifier = "tablecell"
     
     override func viewDidAppear(_ animated: Bool) {
-        APIManager.responseAPI(current: "\(Constants.baseURL)movies")
+        APIController.shared.responseAPI(current: "\(Constants.baseURL)movies")
     }
     
     override func viewDidLoad() {
@@ -23,7 +22,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         movieTableView.delegate = self
         movieTableView.dataSource = self
-        APIManager.delegate = self
+        APIController.shared.delegate = self
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,17 +71,17 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let Action1 = UIAlertAction(title: "예매순위", style: .default, handler: {
                  (alert: UIAlertAction!) -> Void in
-            self.APIManager.responseAPI(current: "\(Constants.baseURL)movies?order_type=0")
+            APIController.shared.responseAPI(current: "\(Constants.baseURL)movies?order_type=0")
         })
 
         let Action2 = UIAlertAction(title: "큐레이션", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-            self.APIManager.responseAPI(current: "\(Constants.baseURL)movies?order_type=1")
+            APIController.shared.responseAPI(current: "\(Constants.baseURL)movies?order_type=1")
         })
       
         let Action3 = UIAlertAction(title: "개봉일", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-            self.APIManager.responseAPI(current: "\(Constants.baseURL)movies?order_type=2")
+            APIController.shared.responseAPI(current: "\(Constants.baseURL)movies?order_type=2")
         })
        
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: {

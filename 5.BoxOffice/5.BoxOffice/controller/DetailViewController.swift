@@ -8,11 +8,7 @@
 import UIKit
 
 class DetailViewController: UIViewController, APIControllerDelegate {
-    
-    var APIManager = APIController()
-    
-    var starchanger = Star()
-    
+
     var userRating : Double?
     var gradeimage: UIImage?
     var movieimage : UIImage?
@@ -47,15 +43,15 @@ class DetailViewController: UIViewController, APIControllerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        APIManager.delegate = self
-        starchanger.starGrade(rate: userRating!)
-        star1.image = starchanger.star1
-        star2.image = starchanger.star2
-        star3.image = starchanger.star3
-        star4.image = starchanger.star4
-        star5.image = starchanger.star5
+        APIController.shared.delegate = self
+        Star.shared.starGrade(rate: userRating!)
+        star1.image = Star.shared.star1
+        star2.image = Star.shared.star2
+        star3.image = Star.shared.star3
+        star4.image = Star.shared.star4
+        star5.image = Star.shared.star5
         
-        APIManager.responseAPI(current: "\(Constants.baseURL)movie?id=\(id!)")
+        APIController.shared.responseAPI(current: "\(Constants.baseURL)movie?id=\(id!)")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

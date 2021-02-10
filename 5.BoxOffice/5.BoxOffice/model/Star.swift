@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-struct Star{
+class Star{
+    static let shared = Star()
     var rating : Double?
     var star1 : UIImage?
     var star2 : UIImage?
@@ -16,7 +17,7 @@ struct Star{
     var star4 : UIImage?
     var star5 : UIImage?
  
-    mutating func starGrade(rate : Double){
+    func starGrade(rate : Double){
         
         star1 = #imageLiteral(resourceName: "ic_star_label")
         star2 = #imageLiteral(resourceName: "ic_star_label")

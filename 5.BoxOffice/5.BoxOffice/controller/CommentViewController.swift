@@ -9,8 +9,6 @@ import UIKit
 
 class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, APIControllerDelegate {
     
-    var APIManager = APIController()
-    
     var starchanger = Star()
     
     var commentList : [MovieComment]  = []
@@ -46,7 +44,7 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
         cell.contentLabel.text = comment.contents
         cell.cellrating = comment.rating!
         
-        starchanger.starGrade(rate : cell.cellrating!)
+        Star.shared.starGrade(rate : cell.cellrating!)
         
         cell.star1.image = starchanger.star1
         cell.star2.image = starchanger.star2
@@ -64,7 +62,7 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     override func viewDidAppear(_ animated: Bool) {
         
-        APIManager.responseAPI(current: "\(Constants.baseURL)comments?movie_id=\(movieID!)")
+        APIController.shared.responseAPI(current: "\(Constants.baseURL)comments?movie_id=\(movieID!)")
     }
     
     override func viewDidLoad() {
@@ -72,7 +70,7 @@ class CommentViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         contentTable.delegate = self
         contentTable.dataSource = self
-        APIManager.delegate = self
+        APIController.shared.delegate = self
     }
     
 

@@ -11,8 +11,9 @@ protocol APIControllerDelegate{
     func UpdateView(_ apicontrol : APIController, _ dd : Data)
 }
 
-struct APIController{
+class APIController{
     
+    static let shared = APIController()
     var delegate : APIControllerDelegate?
     var currentURL : String?
     

@@ -8,8 +8,6 @@
 import UIKit
 
 class WriteCommentViewController: UIViewController,UITextFieldDelegate,UITextViewDelegate {
-    
-    var starchanger = Star()
 
     var textCheck = 0
     var movieName : String?
@@ -52,12 +50,12 @@ class WriteCommentViewController: UIViewController,UITextFieldDelegate,UITextVie
         }
         if grade <= 10 && grade >= 0{
             completeButton.isEnabled = true
-            starchanger.starGrade(rate: grade)
-            star1.image = starchanger.star1
-            star2.image = starchanger.star2
-            star3.image = starchanger.star3
-            star4.image = starchanger.star4
-            star5.image = starchanger.star5
+            Star.shared.starGrade(rate: grade)
+            star1.image = Star.shared.star1
+            star2.image = Star.shared.star2
+            star3.image = Star.shared.star3
+            star4.image = Star.shared.star4
+            star5.image = Star.shared.star5
         }else{
             completeButton.isEnabled = false
             star1.image = #imageLiteral(resourceName: "ic_star_large")

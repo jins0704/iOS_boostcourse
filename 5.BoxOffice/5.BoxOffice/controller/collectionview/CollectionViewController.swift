@@ -9,8 +9,6 @@ import UIKit
 
 class CollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, APIControllerDelegate {
     
-    var APIManager = APIController()
-    
     var movieList : [Movie]  = []
     
     let flowLayout = UICollectionViewFlowLayout()
@@ -20,7 +18,7 @@ class CollectionViewController: UIViewController,UICollectionViewDelegate,UIColl
     let cellIdentifier = "collectioncell"
     
     override func viewDidAppear(_ animated: Bool) {
-        APIManager.responseAPI(current: "\(Constants.baseURL)movies")
+        APIController.shared.responseAPI(current: "\(Constants.baseURL)movies")
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -65,7 +63,7 @@ class CollectionViewController: UIViewController,UICollectionViewDelegate,UIColl
         
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
-        APIManager.delegate = self
+        APIController.shared.delegate = self
         settingFlowlayout()
         // Do any additional setup after loading the view.
     }
@@ -75,17 +73,17 @@ class CollectionViewController: UIViewController,UICollectionViewDelegate,UIColl
         
         let Action1 = UIAlertAction(title: "예매순위", style: .default, handler: {
                  (alert: UIAlertAction!) -> Void in
-            self.APIManager.responseAPI(current: "\(Constants.baseURL)movies?order_type=0")
+            APIController.shared.responseAPI(current: "\(Constants.baseURL)movies?order_type=0")
         })
 
         let Action2 = UIAlertAction(title: "큐레이션", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-            self.APIManager.responseAPI(current: "\(Constants.baseURL)movies?order_type=1")
+            APIController.shared.responseAPI(current: "\(Constants.baseURL)movies?order_type=1")
         })
       
         let Action3 = UIAlertAction(title: "개봉일", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-            self.APIManager.responseAPI(current: "\(Constants.baseURL)movies?order_type=2")
+            APIController.shared.responseAPI(current: "\(Constants.baseURL)movies?order_type=2")
         })
        
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: {
